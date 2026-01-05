@@ -38,6 +38,16 @@ Dự án sử dụng nhiều bảng dữ liệu đại diện cho các thành ph
 ⚠️ Raw data files are not included in this repository due to file size limitations and data privacy considerations.
 
 ---
+## 📄 Báo cáo phân tích (Project Report)
+
+Báo cáo chi tiết của dự án được trình bày dưới dạng **PDF**.
+
+⚠️ GitHub chỉ hiển thị trước một số trang đầu của file PDF khi preview trực tiếp trên web.  
+Để xem **đầy đủ nội dung báo cáo**, vui lòng tải file về máy.
+
+👉 [Download Full Report (PDF)](report/Enterprise_Fraud_Data_Analysis_Report.pdf)
+
+---
 
 ## ❓ Câu hỏi phân tích chính
 
@@ -94,6 +104,7 @@ Dự án sử dụng nhiều bảng dữ liệu đại diện cho các thành ph
 
 **Trịnh Ngọc Minh Nhật**  
 *Data Analyst / Data Science Student*
+
 
 
 
