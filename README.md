@@ -33,7 +33,8 @@ Dự án sử dụng nhiều bảng dữ liệu đại diện cho các thành ph
 - `cards_data.csv` – Thông tin thẻ thanh toán  
 - `transactions_data.csv` – Dữ liệu giao dịch  
 - `mcc_codes.csv` – Danh mục ngành nghề (Merchant Category Code)  
-- `train_fraud_labels.csv` – Nhãn gian lận phục vụ phân tích  
+- `train_fraud_labels.csv` – Nhãn gian lận phục vụ phân tích
+  ⚠️ Raw data files are not included in this repository due to file size limitations and data privacy considerations.
 
 ---
 
@@ -92,3 +93,4 @@ Dự án sử dụng nhiều bảng dữ liệu đại diện cho các thành ph
 
 **Trịnh Ngọc Minh Nhật**  
 *Data Analyst / Data Science Student*
+
