@@ -1,0 +1,11 @@
+# Ignore raw data
+data/*.csv
+
+# Ignore temporary Word files
+~$*.docx
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
