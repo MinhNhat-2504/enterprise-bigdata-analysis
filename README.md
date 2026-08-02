@@ -2,7 +2,7 @@
 
 Project phân tích khoảng **13,3 triệu giao dịch thẻ** của một doanh nghiệp trong giai đoạn 2010–2019. Mình đặt mình vào vai một Data Analyst của công ty và cố gắng trả lời mấy câu hỏi mà bất kỳ doanh nghiệp nào cũng quan tâm: khách hàng đang chi tiêu như thế nào, tiền chảy về đâu, ai là nhóm khách đáng giá nhất, và kẻ gian thường ra tay vào lúc nào.
 
-Toàn bộ quá trình phân tích nằm trong notebook [enterprise_fraud_analysis.ipynb](notebook/enterprise_fraud_analysis.ipynb). Kết quả và nhận xét chi tiết được tổng hợp trong [báo cáo PDF](report/Enterprise_Fraud_Data_Analysis_Report.pdf) (GitHub chỉ preview được vài trang đầu, muốn đọc đầy đủ thì tải file về).
+Toàn bộ quá trình phân tích nằm trong notebook [enterprise_fraud_analysis.ipynb](enterprise_fraud_analysis.ipynb). Kết quả và nhận xét chi tiết được tổng hợp trong [báo cáo PDF](report/Enterprise_Fraud_Data_Analysis_Report.pdf) (GitHub chỉ preview được vài trang đầu, muốn đọc đầy đủ thì tải file về).
 
 ## Dữ liệu
 
