@@ -1,6 +1,9 @@
 # Ignore raw data
 data/*.csv
 
+# Keep report local only
+report/
+
 # Ignore temporary Word files
 ~$*.docx
 
