@@ -1,110 +1,45 @@
-# 📊 Enterprise Fraud Data Analysis (2010–2019)
+# Phân tích giao dịch & gian lận doanh nghiệp (2010–2019)
 
-## 📌 Tổng quan dự án
+Project phân tích khoảng **13,3 triệu giao dịch thẻ** của một doanh nghiệp trong giai đoạn 2010–2019. Mình đặt mình vào vai một Data Analyst của công ty và cố gắng trả lời mấy câu hỏi mà bất kỳ doanh nghiệp nào cũng quan tâm: khách hàng đang chi tiêu như thế nào, tiền chảy về đâu, ai là nhóm khách đáng giá nhất, và kẻ gian thường ra tay vào lúc nào.
 
-Dự án tập trung vào **phân tích dữ liệu giao dịch quy mô lớn của doanh nghiệp**
-trong giai đoạn **2010–2019**, nhằm khai thác insight về:
+Toàn bộ quá trình phân tích nằm trong notebook [enterprise_fraud_analysis.ipynb](notebook/enterprise_fraud_analysis.ipynb). Kết quả và nhận xét chi tiết được tổng hợp trong [báo cáo PDF](report/Enterprise_Fraud_Data_Analysis_Report.pdf) (GitHub chỉ preview được vài trang đầu, muốn đọc đầy đủ thì tải file về).
 
-- Hành vi chi tiêu của khách hàng  
-- Dòng tiền và phân bổ chi tiêu  
-- Rủi ro gian lận (fraud) trong hệ thống giao dịch  
+## Dữ liệu
 
-Dự án được thực hiện dưới góc nhìn của một **Data Analyst / Data Scientist**,
-đóng vai trò hỗ trợ doanh nghiệp trong việc hiểu khách hàng và quản lý rủi ro dựa trên dữ liệu.
+Bộ dữ liệu gồm 5 bảng mô phỏng hệ thống giao dịch của một doanh nghiệp:
 
----
+| File | Nội dung | Quy mô |
+|---|---|---|
+| `transactions_data.csv` | Lịch sử giao dịch | ~13,3 triệu dòng (hơn 1GB) |
+| `users_data.csv` | Thông tin khách hàng | ~2.000 khách |
+| `cards_data.csv` | Thông tin thẻ | ~6.100 thẻ |
+| `mcc_codes.csv` | Danh mục ngành nghề (MCC) | ~110 mã |
+| `train_fraud_labels.csv` | Nhãn gian lận | — |
 
-## 🎯 Mục tiêu phân tích
+Dữ liệu gốc không được đưa lên repo vì dung lượng quá lớn (riêng bảng giao dịch đã hơn 1GB). Muốn chạy lại notebook thì cần tải dữ liệu về và đặt vào thư mục `data/`.
 
-- Phân tích hành vi chi tiêu của khách hàng theo từng giao dịch  
-- So sánh xu hướng giao dịch **trả trước** và **trả sau**  
-- Xây dựng chân dung **khách hàng chi tiêu cao**  
-- Phân tích **dòng tiền chủ yếu chảy về đâu**  
-- Xác định **thời điểm rủi ro gian lận cao nhất**  
-- Quan sát sự thay đổi của các yếu tố trên trong giai đoạn **2010–2019**
+## Cách làm
 
----
+Vì dữ liệu khá nặng so với việc xử lý bằng pandas trên máy cá nhân, bước đầu tiên là làm sạch và tối ưu bộ nhớ: strip ký hiệu `$` ở các cột tiền tệ, ép kiểu (downcast) toàn bộ cột số để giảm RAM, và chủ động `del` + `gc.collect()` sau mỗi lần merge. Sau đó ghép cả 5 bảng lại thành một bảng lớn duy nhất rồi khai thác bằng EDA — thống kê mô tả, phân tích phân phối và trực quan hóa theo thời gian với matplotlib/seaborn.
 
-## 📂 Dữ liệu sử dụng
+## Một vài phát hiện chính
 
-Dự án sử dụng nhiều bảng dữ liệu đại diện cho các thành phần khác nhau của hệ thống giao dịch:
+- Phần lớn giao dịch có giá trị nhỏ. Doanh thu của công ty phụ thuộc vào **số lượng đơn** chứ không phải giá trị mỗi đơn — khách khá nhạy cảm về giá.
+- Khách nghiêng hẳn về thẻ **debit (trả trước)**: tâm lý có bao nhiêu tiêu bấy nhiêu thay vì vay mượn trả sau.
+- Chi tiêu theo độ tuổi có hình chữ U: nhóm trung niên 35–55 dè dặt nhất, trong khi nhóm trẻ và nhóm lớn tuổi lại sẵn sàng chi nhiều hơn trên mỗi đơn.
+- Doanh thu tăng đều gần cả thập kỷ nhưng **sụt mạnh vào năm 2019** — dấu hiệu đáng lo cần điều tra thêm.
+- Điều bất ngờ nhất: gian lận không diễn ra lén lút lúc nửa đêm như mình nghĩ, mà **dồn vào giờ hành chính** — kẻ gian trà trộn vào lúc lượng giao dịch thật cao nhất để qua mặt hệ thống kiểm soát.
 
-- `users_data.csv` – Thông tin khách hàng  
-- `cards_data.csv` – Thông tin thẻ thanh toán  
-- `transactions_data.csv` – Dữ liệu giao dịch  
-- `mcc_codes.csv` – Danh mục ngành nghề (Merchant Category Code)  
-- `train_fraud_labels.csv` – Nhãn gian lận phục vụ phân tích
+Chi tiết từng phân tích kèm biểu đồ và đề xuất giải pháp đều có trong notebook và báo cáo.
 
-⚠️ Raw data files are not included in this repository due to file size limitations and data privacy considerations.
+## Công cụ
 
----
-## 📄 Báo cáo phân tích (Project Report)
+Python (pandas, numpy, matplotlib, seaborn), chạy trên Jupyter Notebook.
 
-Báo cáo chi tiết của dự án được trình bày dưới dạng **PDF**.
+## Hướng phát triển
 
-⚠️ GitHub chỉ hiển thị trước một số trang đầu của file PDF khi preview trực tiếp trên web.  
-Để xem **đầy đủ nội dung báo cáo**, vui lòng tải file về máy.
-
-👉 [Download Full Report (PDF)](report/Enterprise_Fraud_Data_Analysis_Report.pdf)
+Hiện tại project mới dừng ở EDA. Nếu có thời gian mình muốn thử xây model phát hiện gian lận (dữ liệu đã có sẵn nhãn) và làm một dashboard theo dõi giao dịch bất thường.
 
 ---
 
-## ❓ Câu hỏi phân tích chính
-
-- Khách hàng chi tiêu bao nhiêu trong mỗi giao dịch?  
-- Khách hàng có xu hướng sử dụng giao dịch trả trước hay trả sau?  
-- Chân dung khách hàng chi tiêu nhiều nhất là ai?  
-- Dòng tiền của khách hàng chủ yếu chảy về đâu?  
-- Thời điểm nào rủi ro bị tấn công gian lận (fraud) cao nhất?  
-- Các đặc điểm trên thay đổi như thế nào theo thời gian (2010–2019)?
-
----
-
-## 🧠 Phương pháp & kỹ thuật sử dụng
-
-- Exploratory Data Analysis (EDA)  
-- Thống kê mô tả  
-- Trực quan hóa dữ liệu theo thời gian  
-- Phân tích phân phối và xu hướng  
-- So sánh nhóm khách hàng và loại giao dịch  
-
----
-
-## 📈 Kết quả & Insight chính
-
-- Xác định rõ **nhóm khách hàng chi tiêu cao** và đặc điểm hành vi của họ  
-- Phát hiện sự khác biệt rõ ràng giữa **giao dịch trả trước và trả sau**  
-- Dòng tiền tập trung vào một số **nhóm ngành cụ thể**  
-- Rủi ro gian lận có xu hướng tăng cao tại một số **thời điểm và kịch bản nhất định**  
-- Xu hướng chi tiêu và rủi ro thay đổi rõ rệt theo thời gian  
-
----
-
-## 🛠️ Công cụ & công nghệ
-
-- Python  
-- Pandas, NumPy  
-- Matplotlib / Seaborn  
-- Jupyter Notebook  
-
----
-
-## 📌 Trạng thái dự án
-
-- Hoàn thành phân tích EDA  
-- Phục vụ mục đích **học tập, nghiên cứu và xây dựng portfolio cá nhân**  
-- Có thể mở rộng sang:
-  - Machine Learning cho Fraud Detection  
-  - Feature Engineering  
-  - Dashboard giám sát gian lận  
-
----
-
-## 👤 Tác giả
-
-**Trịnh Ngọc Minh Nhật**  
-*Data Analyst / Data Science Student*
-
-
-
-
+**Trịnh Ngọc Minh Nhật** — Data Analyst / Data Science Student
